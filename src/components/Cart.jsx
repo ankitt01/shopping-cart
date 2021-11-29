@@ -1,62 +1,53 @@
-import React, { createContext, useReducer, useEffect } from "react";
-import "./cart.css";
-import { products } from "./products";
-import ContextCart from "./ContextCart";
-import { reducer } from "./reducer";
-
-export const CartContext = createContext();
-
-const initialState = {
-  item: products,
-  totalAmount: 0,
-  totalItem: 0,
-};
-
+import React from 'react'
+import './cart.css'
+import {Scrollbars} from 'react-custom-scrollbars-2'
 const Cart = () => {
-  // const [item, setItem] = useState(products);
-  const [state, dispatch] = useReducer(reducer, initialState);
-
-  // to delete the indv. elements from an Item Cart
-  const removeItem = (id) => {
-    return dispatch({
-      type: "REMOVE_ITEM",
-      payload: id,
-    });
-  };
-
-  // clear the cart
-  const clearCart = () => {
-    return dispatch({ type: "CLEAR_CART" });
-  };
-
-  // increment the item
-  const increment = (id) => {
-    return dispatch({
-      type: "INCREMENT",
-      payload: id,
-    });
-  };
-
-  // decrement the item
-  const decrement = (id) => {
-    return dispatch({
-      type: "DECREMENT",
-      payload: id,
-    });
-  };
-
-  // we will use the useEffect to update the data
-  useEffect(() => {
-    dispatch({ type: "GET_TOTAL" });
-    // console.log("Awesome");
-  }, [state.item]);
-
   return (
-    <CartContext.Provider
-      value={{ ...state, removeItem, clearCart, increment, decrement }}>
-      <ContextCart />
-    </CartContext.Provider>
-  );
-};
+    <>
+      <header>
+        <div className="continue-shopping">
+          <img src="./images/arrow.png" alt="arrow" className="arrow-icon" />      
+          <h3>Continue Shopping</h3>
+        </div>
+        <div className="cart-icon">
+          <img src="./images/cart.png" alt="cart" />
+          <p>7</p>
+        </div>
+      </header>
+      <section className="main-cart-section">
+        <h1>Shopping Cart</h1>
+        <p classname="total-items">You have <span className="total-items-count">7</span> items in your shopping cart</p>
 
-export default Cart;
+        <div className="cart-items">
+          <div className="cart-items-container ">
+            <Scrollbars>
+            <div className="items-info">
+              <div className="product-img">
+                <img src="https://images.pexels.com/photos/404280/pexels-photo-404280.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="product" />
+              </div>
+              <div className="title">
+                <h2>Samsung S21</h2>
+                <p>Black Color</p>
+              </div>
+              <div className="add-minus-quantity">
+                <i className="fas fa-minus minus"  ></i>
+                <input type="text" placeholder="2" />
+                <i className="fas fa-plus add"></i>
+              </div>
+              <div className="price">
+                <h3>2000rs</h3>
+              </div>
+
+              <div className="remove-item">
+                <i className="fas fa-trash-alt remove"></i>
+              </div>
+            </div>
+            </Scrollbars>
+          </div>
+        </div>
+      </section>
+    </>
+  )
+}
+
+export default Cart

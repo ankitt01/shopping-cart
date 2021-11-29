@@ -106,7 +106,7 @@ header {
     margin-bottom: 1rem;
 }
 
-.main-cart-section .total-items {
+.main-cart-section p {
     font-style: normal;
     font-weight: normal;
     font-size: 1.8rem;
